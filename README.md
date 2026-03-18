@@ -1,63 +1,75 @@
 # NUMAD26SP
 
-<div align="center">
-
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-0095D5?style=for-the-badge&logo=kotlin&logoColor=white)
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
 
-**Northeastern University Mobile Application Development Course**  
-**Spring 2026**
+**Northeastern University Mobile Application Development Course | Spring 2026**
 
 [English](#english) | [中文](#中文)
-
-</div>
 
 ---
 
 <a name="english"></a>
-## 🇺🇸 English Version
+## English Version
 
 ### About This Project
 
-This is the course project for **NUMAD (Mobile Application Development)** at the University, Spring 2026. The application will be continuously developed throughout the semester, with new features added for each assignment.
+This is the course project for **NUMAD (Mobile Application Development)** at Northeastern University, Spring 2026. The application is continuously developed throughout the semester, with new features added for each assignment.
 
 ### Current Features
 
+#### Assignment 1 — Hello World
 - **Hello World Display**: Main screen with "Hello World!" text
-- **About Me Button**: Displays developer name and email in a Toast message
 - **Custom App Icon**: Launcher icon with initials "YP"
 - **Modern UI**: Built with Jetpack Compose
+
+#### Assignment 3 — Quic Calc
+- **About Me Button**: Launches a dedicated screen showing developer information
+- **Quic Calc Button**: Launches a calculator activity
+- **Calculator**: 14-button layout (0–9, +, −, =, x) using a single ConstraintLayout
+- **Expression Evaluation**: Supports addition and subtraction with left-to-right evaluation
+- **Delete**: The x button removes the last character
+- **Orientation Support**: Layout adapts to both portrait and landscape
+
+#### Assignment 4 — Contacts Collector
+- **Contacts Collector Button**: Launches a contacts management activity
+- **RecyclerView List**: Displays all contacts with name and phone number
+- **FAB Add Contact**: Floating action button opens a dialog to add a new contact
+- **Tap to Call**: Tapping a contact opens the system dialer with their number
+- **Edit Contact**: Modify existing contact name and phone number
+- **Delete Contact**: Remove contacts with a confirmation dialog
+- **Snackbar Feedback**: Confirms successful or unsuccessful contact creation with an Undo action
 
 ### Technical Stack
 
 | Category | Technology |
 |----------|-----------|
 | **Language** | Kotlin |
-| **UI Framework** | Jetpack Compose |
+| **UI Framework** | Jetpack Compose (Main) + XML Views (Activities) |
 | **IDE** | Android Studio |
 | **Min SDK** | API 27 (Android 8.1 Oreo) |
-| **Target SDK** | API 34 |
+| **Target SDK** | API 36 |
 | **Build System** | Gradle (Groovy DSL) |
 
 ### Project Structure
 
 ```
-NUMAD26SP_YanxiPan/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/edu/northeastern/numad26sp_yanxipan/
-│   │   │   │   ├── MainActivity.kt
-│   │   │   │   └── ui/theme/
-│   │   │   ├── res/
-│   │   │   │   ├── mipmap/         # App icons
-│   │   │   │   ├── values/         # String resources
-│   │   │   │   └── drawable/       # Image assets
-│   │   │   └── AndroidManifest.xml
-│   └── build.gradle
-├── gradle/
-└── build.gradle
+app/src/main/
+├── java/edu/northeastern/numad26sp_yanxipan/
+│   ├── ui/theme/
+│   ├── MainActivity.kt          # Main screen with all navigation buttons
+│   ├── AboutMeActivity.kt       # Developer information screen
+│   ├── QuicCalcActivity.kt      # Calculator
+│   └── ContactsActivity.kt      # Contacts list and adapter
+├── res/layout/
+│   ├── activity_main.xml
+│   ├── activity_quic_calc.xml
+│   ├── activity_about_me.xml
+│   ├── activity_contacts.xml
+│   ├── item_contact.xml
+│   └── dialog_contact.xml
+└── AndroidManifest.xml
 ```
 
 ### Prerequisites
@@ -66,78 +78,82 @@ NUMAD26SP_YanxiPan/
 - JDK 8 or higher
 - Android SDK with API 27+
 
+### Assignment Progress
+
+- [x] Assignment 1: Hello World App with custom icon
+- [x] Assignment 3: Quic Calc + About Me Activity
+- [x] Assignment 4: Contacts Collector with RecyclerView
+
 ### Development Notes
 
-This project uses **Jetpack Compose** for UI development, which is the modern declarative UI toolkit for Android. Key concepts include:
+This project uses **Jetpack Compose** for the main screen and traditional **XML Views** for feature activities. Key concepts include:
 
 - **Composable Functions**: Building UI with composable functions
 - **State Management**: Using `remember` and `mutableStateOf`
 - **Material Design 3**: Following the latest Material Design guidelines
+- **ConstraintLayout**: Single layout supporting both orientations
+- **RecyclerView**: Efficient list rendering with a custom adapter
+
 ---
 
 <a name="中文"></a>
-## 🇨🇳 中文版本
+## 中文版本
 
 ### 项目简介
 
-这是大学 2026 年春季学期**移动应用开发（NUMAD）**课程的项目。该应用将在整个学期中持续开发，每次作业都会添加新功能。
+这是东北大学 2026 年春季学期**移动应用开发（NUMAD）**课程的项目。该应用在整个学期中持续开发，每次作业都会添加新功能。
 
 ### 当前功能
 
+#### 作业1 — Hello World
 - **Hello World 显示**: 主屏幕显示 "Hello World!" 文本
-- **关于我按钮**: 点击按钮显示包含开发者姓名和邮箱的 Toast 消息
 - **自定义应用图标**: 启动器图标包含首字母 "YP"
 - **现代化界面**: 使用 Jetpack Compose 构建
+
+#### 作业3 — Quic Calc
+- **About Me 按钮**: 跳转到专属页面显示开发者信息
+- **Quic Calc 按钮**: 跳转到计算器页面
+- **计算器**: 使用单一 ConstraintLayout 排布 14 个按钮（0–9、+、−、=、x）
+- **表达式求值**: 支持加减运算，从左到右计算
+- **删除功能**: x 按钮删除最后一个字符
+- **竖横屏适配**: 布局在两个方向均正常显示
+
+#### 作业4 — Contacts Collector
+- **Contacts Collector 按钮**: 跳转联系人管理页面
+- **RecyclerView 列表**: 显示所有联系人的姓名和电话
+- **FAB 添加联系人**: 浮动按钮打开对话框输入姓名和电话
+- **点击拨号**: 点击联系人打开系统拨号盘
+- **编辑联系人**: 修改已有联系人的姓名和电话
+- **删除联系人**: 带确认弹窗的删除功能
+- **Snackbar 反馈**: 添加成功或失败的提示，含撤销操作
 
 ### 技术栈
 
 | 类别 | 技术 |
 |------|------|
 | **编程语言** | Kotlin |
-| **UI框架** | Jetpack Compose |
+| **UI框架** | Jetpack Compose（主界面）+ XML Views（各 Activity）|
 | **开发工具** | Android Studio |
 | **最低SDK** | API 27 (Android 8.1 Oreo) |
-| **目标SDK** | API 34 |
+| **目标SDK** | API 36 |
 | **构建系统** | Gradle (Groovy DSL) |
 
-### 项目结构
+### 作业进度
 
-```
-NUMAD26SP_YanxiPan/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/edu/northeastern/numad26sp_yanxipan/
-│   │   │   │   ├── MainActivity.kt        # 主活动
-│   │   │   │   └── ui/theme/              # 主题配置
-│   │   │   ├── res/
-│   │   │   │   ├── mipmap/                # 应用图标
-│   │   │   │   ├── values/                # 字符串资源
-│   │   │   │   └── drawable/              # 图片资源
-│   │   │   └── AndroidManifest.xml        # 应用清单
-│   └── build.gradle                        # 应用级构建配置
-├── gradle/                                 # Gradle wrapper
-└── build.gradle                            # 项目级构建配置
-```
-
-### 环境要求
-
-- Android Studio Hedgehog (2023.1.1) 或更新版本
-- JDK 8 或更高版本
-- Android SDK API 27+
+- [x] 作业1: Hello World 应用和自定义图标
+- [x] 作业3: Quic Calc + About Me Activity
+- [x] 作业4: Contacts Collector + RecyclerView
 
 ### 开发笔记
 
-本项目使用 **Jetpack Compose** 进行 UI 开发，这是 Android 的现代声明式 UI 工具包。主要概念包括：
+本项目主界面使用 **Jetpack Compose**，功能页面使用传统 **XML Views**。主要概念包括：
 
 - **Composable 函数**: 使用可组合函数构建 UI
 - **状态管理**: 使用 `remember` 和 `mutableStateOf`
 - **Material Design 3**: 遵循最新的 Material Design 设计指南
+- **ConstraintLayout**: 单一布局支持竖横屏两种方向
+- **RecyclerView**: 使用自定义 Adapter 实现高效列表渲染
 
 ---
 
-<div align="center">
-
-**Made by Yanxi Pan**
-
-</div>
+**Made by Yennie Pan**
