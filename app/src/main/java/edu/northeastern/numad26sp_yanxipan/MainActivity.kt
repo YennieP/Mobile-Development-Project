@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val context = LocalContext.current
 
-    Column(
+    Column( // a layout container like LinearLayout in xml
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -58,6 +58,7 @@ fun MainScreen() {
         // About Me button - now launches AboutMeActivity instead of Toast
         Button(
             onClick = {
+                // intent: jump to another page
                 val intent = Intent(context, AboutMeActivity::class.java)
                 context.startActivity(intent)
             },

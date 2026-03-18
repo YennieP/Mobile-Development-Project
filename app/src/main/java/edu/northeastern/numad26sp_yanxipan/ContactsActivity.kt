@@ -22,11 +22,13 @@ data class Contact(val id: Int, var name: String, var phone: String)
 
 class ContactsActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    // UI elements
+    private lateinit var recyclerView: RecyclerView // display the list
     private lateinit var adapter: ContactsAdapter
     private lateinit var fab: FloatingActionButton
     private lateinit var tvEmpty: TextView
 
+    // contact list
     private val contacts = mutableListOf<Contact>()
     private var nextId = 0
 
@@ -34,23 +36,27 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
+        // handle status bar and navigation bar
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        recyclerView = findViewById(R.id.recyclerView)
-        fab = findViewById(R.id.fab)
-        tvEmpty = findViewById(R.id.tvEmpty)
+        recyclerView = findViewById(R.id.recyclerView) // to show list on screen
+        fab = findViewById(R.id.fab) // floating action button
+        tvEmpty = findViewById(R.id.tvEmpty) // Textview to tell user there's no contact
 
         // Set up RecyclerView
+        // adapter render each Contact object as a single line on the screen.
         adapter = ContactsAdapter(
             contacts,
             onContactClick = { contact -> dialPhone(contact.phone) },
             onEditClick = { contact -> showEditDialog(contact) },
             onDeleteClick = { contact -> deleteContact(contact) }
         )
+        // tell RecyclerView how to arrange
+        // LinearLayoutManager: Arranged from top to bottom
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -79,10 +85,13 @@ class ContactsActivity : AppCompatActivity() {
 
     // Show dialog to add a new contact
     private fun showAddDialog() {
+        // LayoutInflater: change xml to view obj
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_contact, null)
+        // store user's inputs
         val etName = dialogView.findViewById<EditText>(R.id.etName)
         val etPhone = dialogView.findViewById<EditText>(R.id.etPhone)
 
+        // the pop out window
         AlertDialog.Builder(this)
             .setTitle("Add Contact")
             .setView(dialogView)
@@ -93,12 +102,12 @@ class ContactsActivity : AppCompatActivity() {
                 if (name.isNotEmpty() && phone.isNotEmpty()) {
                     val newContact = Contact(nextId++, name, phone)
                     contacts.add(newContact)
-                    adapter.notifyItemInserted(contacts.size - 1)
+                    adapter.notifyItemInserted(contacts.size - 1) // tell adapter a new contact is added
                     updateEmptyView()
 
-                    // Show success Snackbar with Undo action
+                    // Show success Snackbar notification message with Undo action button
                     Snackbar.make(fab, "Contact \"$name\" added", Snackbar.LENGTH_LONG)
-                        .setAction("Undo") {
+                        .setAction("Undo") { // user can use 'undo' to cancel the operation
                             contacts.remove(newContact)
                             adapter.notifyDataSetChanged()
                             updateEmptyView()
@@ -115,22 +124,26 @@ class ContactsActivity : AppCompatActivity() {
 
     // Show dialog to edit an existing contact
     private fun showEditDialog(contact: Contact) {
+        // load dialog_contact.xml as an view obj
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_contact, null)
+
         val etName = dialogView.findViewById<EditText>(R.id.etName)
         val etPhone = dialogView.findViewById<EditText>(R.id.etPhone)
 
-        // Pre-fill existing values
+        // Pre-fill existing values into two EditText
         etName.setText(contact.name)
         etPhone.setText(contact.phone)
 
+        // a pop out window
         AlertDialog.Builder(this)
             .setTitle("Edit Contact")
             .setView(dialogView)
-            .setPositiveButton("Save") { _, _ ->
-                val name = etName.text.toString().trim()
+            .setPositiveButton("Save") { _, _ -> // the Save button
+                val name = etName.text.toString().trim() // get user input and drop spaces
                 val phone = etPhone.text.toString().trim()
 
                 if (name.isNotEmpty() && phone.isNotEmpty()) {
+                    // update existed contact info
                     contact.name = name
                     contact.phone = phone
                     adapter.notifyDataSetChanged()
@@ -139,7 +152,7 @@ class ContactsActivity : AppCompatActivity() {
                     Snackbar.make(fab, "Failed: Name and phone cannot be empty", Snackbar.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Cancel", null) // a button to cancel edition
             .show()
     }
 
@@ -160,7 +173,8 @@ class ContactsActivity : AppCompatActivity() {
     }
 }
 
-// RecyclerView Adapter
+// RecyclerView Adapter: accept a Contact obj and 3 methods
+// change data in contact list to UI on screen
 class ContactsAdapter(
     private val contacts: MutableList<Contact>,
     private val onContactClick: (Contact) -> Unit,
@@ -168,6 +182,8 @@ class ContactsAdapter(
     private val onDeleteClick: (Contact) -> Unit
 ) : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
+    // ViewHolder: Cashes all UI components in each item
+    // we don't need to reload findViewById when rolling the list
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvName: TextView = view.findViewById(R.id.tvContactName)
         val tvPhone: TextView = view.findViewById(R.id.tvContactPhone)
@@ -175,12 +191,15 @@ class ContactsAdapter(
         val btnDelete: TextView = view.findViewById(R.id.btnDelete)
     }
 
+    // 1. load item_contact.xml to create new item view, pack it as ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_contact, parent, false)
         return ViewHolder(view)
     }
 
+    // 2. connect data to ViewHolder, fill data into TextView
+    // called when rolling screen to fill in data
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
         holder.tvName.text = contact.name
@@ -190,5 +209,6 @@ class ContactsAdapter(
         holder.btnDelete.setOnClickListener { onDeleteClick(contact) }
     }
 
+    // tell getItemCount the number of items in contact list
     override fun getItemCount() = contacts.size
 }

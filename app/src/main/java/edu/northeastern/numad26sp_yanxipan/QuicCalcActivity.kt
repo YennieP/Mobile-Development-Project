@@ -15,11 +15,12 @@ class QuicCalcActivity : AppCompatActivity() {
     // store current text
     private var currentDisplay = "CALC" // 'CALC' is the default output
 
+    // will be called automatically when we create this page
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quic_calc) // load xml layout files
 
-        // handle insets window
+        // handle home bar and navigation bar
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -141,21 +142,21 @@ class QuicCalcActivity : AppCompatActivity() {
 
         for (char in cleanExpression) {
             when (char) {
-                '+', '-' -> {
-                    if (currentNumber.isNotEmpty()) {
+                '+', '-' -> { // if we meet operation
+                    if (currentNumber.isNotEmpty()) { // check if there is number being stored
                         tokens.add(currentNumber.toString())
-                        currentNumber.clear()
+                        currentNumber.clear() // clear currentNumber to store the next one
                     }
-                    tokens.add(char.toString())
+                    tokens.add(char.toString()) // add the operation
                 }
-                in '0'..'9' -> {
+                in '0'..'9' -> { // if we meet number
                     currentNumber.append(char)
                 }
                 else -> throw IllegalArgumentException("Invalid character: $char")
             }
         }
 
-        // Add the last number
+        // Add the last number (no more operation symbol to let it be added)
         if (currentNumber.isNotEmpty()) {
             tokens.add(currentNumber.toString())
         }
@@ -166,16 +167,17 @@ class QuicCalcActivity : AppCompatActivity() {
         }
 
         // Calculate from left to right
-        var result = tokens[0].toInt()
+        var result = tokens[0].toInt() // set the first token as result
         var i = 1
 
-        while (i < tokens.size) {
-            if (i + 1 >= tokens.size) {
+        while (i < tokens.size) { // an operation
+            if (i + 1 >= tokens.size) { // a number
+                // if the expression ends with operation, error
                 throw IllegalArgumentException("Invalid expression format")
             }
 
-            val operator = tokens[i]
-            val nextNumber = tokens[i + 1].toInt()
+            val operator = tokens[i] // get a operation
+            val nextNumber = tokens[i + 1].toInt() // get a number
 
             result = when (operator) {
                 "+" -> result + nextNumber
