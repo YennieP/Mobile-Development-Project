@@ -13,11 +13,11 @@ class QuicCalcActivity : AppCompatActivity() {
     private lateinit var displayText: TextView
 
     // store current text
-    private var currentDisplay = "CALC"
+    private var currentDisplay = "CALC" // 'CALC' is the default output
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quic_calc)
+        setContentView(R.layout.activity_quic_calc) // load xml layout files
 
         // handle insets window
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,7 +39,7 @@ class QuicCalcActivity : AppCompatActivity() {
         val numberButtons = listOf(
             R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
             R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9
-        )
+        ) // a list stores all numbers
 
         numberButtons.forEachIndexed { index, buttonId ->
             findViewById<Button>(buttonId).setOnClickListener {
@@ -63,9 +63,9 @@ class QuicCalcActivity : AppCompatActivity() {
      */
     private fun onNumberClick(number: String) {
         if (currentDisplay == "CALC") {
-            currentDisplay = number
+            currentDisplay = number // replace default output first
         } else {
-            currentDisplay += number
+            currentDisplay += number // add number behind
         }
         updateDisplay()
     }
@@ -75,7 +75,12 @@ class QuicCalcActivity : AppCompatActivity() {
      */
     private fun onOperatorClick(operator: String) {
         if (currentDisplay == "CALC") {
-            currentDisplay = operator
+            // "CALC" 状态不允许直接输入运算符
+            return
+        }
+        // If last character is already an operator, replace it
+        if (currentDisplay.last() == '+' || currentDisplay.last() == '-') {
+            currentDisplay = currentDisplay.dropLast(1) + operator
         } else {
             currentDisplay += operator
         }
