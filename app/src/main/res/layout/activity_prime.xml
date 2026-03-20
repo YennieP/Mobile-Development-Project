@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <!-- Current number being checked -->
+    <TextView
+        android:id="@+id/tvCurrentNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Checking: -"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvLatestPrime"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <!-- Latest prime found -->
+    <TextView
+        android:id="@+id/tvLatestPrime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Latest Prime: -"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvCurrentNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnFindPrimes" />
+
+    <!-- Find Primes button -->
+    <Button
+        android:id="@+id/btnFindPrimes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Find Primes"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLatestPrime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnTerminate" />
+
+    <!-- Terminate Search button -->
+    <Button
+        android:id="@+id/btnTerminate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Terminate Search"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnFindPrimes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cbPacifier" />
+
+    <!-- Pacifier Switch checkbox -->
+    <CheckBox
+        android:id="@+id/cbPacifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pacifier Switch"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnTerminate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

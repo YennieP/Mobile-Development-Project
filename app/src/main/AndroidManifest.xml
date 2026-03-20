@@ -22,6 +22,12 @@
             android:exported="false"
             android:theme="@style/Theme.NUMAD26SP_YanxiPan" />
 
+        <!-- Prime Directive Activity -->
+        <activity
+            android:name=".PrimeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NUMAD26SP_YanxiPan" />
+
         <!-- QuicCalc Activity -->
         <activity
             android:name=".QuicCalcActivity"

@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val context = LocalContext.current
 
-    Column( // a layout container like LinearLayout in xml
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -58,7 +58,6 @@ fun MainScreen() {
         // About Me button - now launches AboutMeActivity instead of Toast
         Button(
             onClick = {
-                // intent: jump to another page
                 val intent = Intent(context, AboutMeActivity::class.java)
                 context.startActivity(intent)
             },
@@ -78,6 +77,19 @@ fun MainScreen() {
             modifier = Modifier.fillMaxWidth(0.6f)
         ) {
             Text(text = "Quic Calc", fontSize = 18.sp)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Prime Directive button
+        Button(
+            onClick = {
+                val intent = Intent(context, PrimeActivity::class.java)
+                context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth(0.6f)
+        ) {
+            Text(text = "Prime Directive", fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
