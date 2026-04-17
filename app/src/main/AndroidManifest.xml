@@ -4,6 +4,9 @@
 
     <!-- Permission to dial phone calls -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -50,6 +53,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--  Location Activity  -->
+        <activity android:name=".LocationActivity" android:exported="false" />
+
 
     </application>
 
