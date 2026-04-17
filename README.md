@@ -32,6 +32,15 @@ This is the course project for **NUMAD (Mobile Application Development)** at Nor
 - **Delete**: The x button removes the last character
 - **Orientation Support**: Layout adapts to both portrait and landscape
 
+#### Assignment 5 — Prime Directive
+- **Prime Directive Button**: Launches a prime number search activity
+- **Find Primes**: Starts a worker thread searching for prime numbers beginning at 3, incrementing by 2
+- **Terminate Search**: Stops the search, last displayed values remain on screen
+- **Pacifier Switch**: Checkbox to verify the main thread is not blocked during search
+- **Rotation Support**: Search continues running across screen rotation using `onSaveInstanceState()`
+- **Back Button Confirmation**: If search is running, pressing back shows a confirmation dialog before exiting
+- Written in **Java** using raw `Thread` and `Handler`
+
 #### Assignment 4 — Contacts Collector
 - **Contacts Collector Button**: Launches a contacts management activity
 - **RecyclerView List**: Displays all contacts with name and phone number
@@ -118,6 +127,15 @@ This project uses **Jetpack Compose** for the main screen and traditional **XML 
 - **删除功能**: x 按钮删除最后一个字符
 - **竖横屏适配**: 布局在两个方向均正常显示
 
+#### 作业5 — Prime Directive
+- **Prime Directive 按钮**: 跳转到质数搜索页面
+- **Find Primes**: 启动工作线程从 3 开始每次 +2 搜索质数
+- **Terminate Search**: 停止搜索，最后显示的数值保留在屏幕上
+- **Pacifier Switch**: 复选框，用于验证搜索运行时主线程未被阻塞
+- **旋转适配**: 使用 `onSaveInstanceState()` 保证旋转屏幕后搜索继续运行
+- **返回键确认**: 搜索运行时按返回键弹出确认框
+- 使用 **Java** 编写，使用原生 `Thread` 和 `Handler`
+
 #### 作业4 — Contacts Collector
 - **Contacts Collector 按钮**: 跳转联系人管理页面
 - **RecyclerView 列表**: 显示所有联系人的姓名和电话
@@ -156,4 +174,4 @@ This project uses **Jetpack Compose** for the main screen and traditional **XML 
 
 ---
 
-**Made by Yennie Pan**
+**Made by Yanxi Pan**

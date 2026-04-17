@@ -33,6 +33,8 @@ class ContactsActivity : AppCompatActivity() {
     private var nextId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // when it's null 屏幕横过来列表消失
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
